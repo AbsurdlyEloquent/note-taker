@@ -1,20 +1,24 @@
 """
-Testing
+Peewee models
 """
-import PySimpleGUI as sg
+import datetime
+import peewee
 
-sg.theme('DarkAmber')
+db = peewee.PostgresqlDatabase('notes', user='person', password='1234',
+                                    host='localhost', port=5432)
 
-layout =[   [sg.Text('Some test on row 1')],
-            [sg.Text('Enter something on Row 2'), sg.InputText()],
-            [sg.Button('ok'), sg.Button('cancel')] ]
+class BaseModel(peewee.Model):
+    class Meta:
+        database = db
 
-window = sg.Window('Note Taker', layout)
+class User(BaseModel):
+    username = peewee.CharField(max_length=20)
 
-while True:
-    event, values = window.read()
-    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
-        break
-    print('You entered ', values[0])
+class Note(BaseModel):
+    title = peewee.CharField(max_length=20)
+    note = peewee.CharField()
+    timestamp = peewee.DateTimeField(deault=datetime.datetime.now)
 
-window.close()
+db.connect()
+db.drop_tables([User, Note])
+db.create_tables([User, Note])
