@@ -17,8 +17,5 @@ class User(BaseModel):
 class Note(BaseModel):
     title = peewee.CharField(max_length=20)
     note = peewee.CharField()
-    timestamp = peewee.DateTimeField(deault=datetime.datetime.now)
-
-db.connect()
-db.drop_tables([User, Note])
-db.create_tables([User, Note])
+    timestamp = peewee.DateTimeField(default=datetime.datetime.now)
+    user = peewee.ForeignKeyField(User, backref='notes')
