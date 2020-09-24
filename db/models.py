@@ -1,21 +1,16 @@
-"""
-Peewee models
-"""
 import datetime
-import peewee
+from connection import db
+import peewee as p
 
-db = peewee.PostgresqlDatabase('notes', user='person', password='1234',
-                                    host='localhost', port=5432)
-
-class BaseModel(peewee.Model):
+class BaseModel(p.Model):
     class Meta:
         database = db
 
 class User(BaseModel):
-    username = peewee.CharField(max_length=20)
+    username = p.CharField(max_length=20)
 
 class Note(BaseModel):
-    title = peewee.CharField(max_length=20)
-    note = peewee.CharField()
-    timestamp = peewee.DateTimeField(default=datetime.datetime.now)
-    user = peewee.ForeignKeyField(User, backref='notes')
+    title = p.CharField(max_length=20)
+    note = p.CharField()
+    timestamp = p.DateTimeField(default=datetime.datetime.now)
+    user = p.ForeignKeyField(User, backref='notes')
