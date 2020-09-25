@@ -6,11 +6,11 @@ class BaseModel(p.Model):
     class Meta:
         database = db
 
-class User(BaseModel):
+class Users(BaseModel):
     username = p.CharField(max_length=20)
 
-class Note(BaseModel):
+class Notes(BaseModel):
     title = p.CharField(max_length=20)
     contents = p.CharField()
     timestamp = p.DateTimeField(default=datetime.datetime.now)
-    user = p.ForeignKeyField(User, backref='notes')
+    user = p.ForeignKeyField(Users, backref='notes')
