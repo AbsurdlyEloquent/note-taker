@@ -1,5 +1,5 @@
 import datetime
-from connection import db
+from db.connection import db
 import peewee as p
 
 class BaseModel(p.Model):
@@ -11,6 +11,6 @@ class User(BaseModel):
 
 class Note(BaseModel):
     title = p.CharField(max_length=20)
-    note = p.CharField()
+    contents = p.CharField()
     timestamp = p.DateTimeField(default=datetime.datetime.now)
     user = p.ForeignKeyField(User, backref='notes')
