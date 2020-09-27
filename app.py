@@ -15,9 +15,8 @@ def commands(command):
         'ls': process.list,
         'ls -a': process.list_all
     }
-    func = switcher[command]
-    if func:
-        return func
+    if command in switcher:
+        return switcher[command]
     else:
         return process.error
 
