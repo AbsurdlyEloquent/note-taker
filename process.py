@@ -1,6 +1,7 @@
 # DEPENDECIES
 import sys
 import os
+from types import SimpleNamespace
 from datetime import datetime
 from dependencies.colors import *
 
@@ -32,14 +33,13 @@ def create_note(user):
     with pretty_output(BOLD, FG_GREEN) as out:
         out.write('Success!', ' ')
     print('Here is your new note:')
-    note_printer(note)
+    note_printer(SimpleNamespace(**note))
 
 def list(user):
     os.system('clear')
-    query = Notes.select().where(Notes.username == user)
     with pretty_output(BOLD) as out:
         out.write(f'Here are all the notes written by {user}')
-    for note in query:
+    for note in Notes.select().where(Notes.username == user):
         note_printer(note)
 
 def list_all(user):
@@ -54,8 +54,8 @@ def list_all(user):
 
 def note_printer(note):
     with pretty_output(BOLD, FG_CYAN) as out:
-        out.write(note['title'])
+        out.write(note.title)
     with pretty_output(DIM, FG_CYAN) as out:
-        out.write(f"by {note['username']} on {note['timestamp']}")
+        out.write(f"by {note.username} on {note.timestamp}")
     with pretty_output(BOLD) as out:
-        out.write(note['contents'], '\n\n')
+        out.write(note.contents, '\n\n')
