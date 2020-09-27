@@ -35,6 +35,7 @@ END = '0e8ed89a-47ba-4cdb-938e-b8af8e084d5c'
 # Text attributes
 ALL_OFF = '\033[0m'
 BOLD = '\033[1m'
+DIM = '\033[2m'
 UNDERSCORE = '\033[4m'
 BLINK = '\033[5m'
 REVERSE = '\033[7m'
@@ -75,9 +76,9 @@ class pretty_output():
     def __exit__(self, type, value, traceback):
         pass
 
-    def write(self, msg):
+    def write(self, msg, end="\n"):
         style = ''.join(self.attributes)
-        print('{}{}{}'.format(style, msg.replace(END, ALL_OFF + style), ALL_OFF))
+        print('{}{}{}'.format(style, msg.replace(END, ALL_OFF + style), ALL_OFF), end=end)
 
 
 if __name__ == '__main__':
