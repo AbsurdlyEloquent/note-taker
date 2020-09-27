@@ -59,3 +59,9 @@ def note_printer(note):
         out.write(f"by {note.username} on {note.timestamp}")
     with pretty_output(BOLD) as out:
         out.write(note.contents, '\n\n')
+
+def error(user):
+    with pretty_output(BOLD, FG_RED) as out:
+        out.write('Error!', ' ')
+    with pretty_output(BOLD) as out:
+        out.write('Command not found, please try again')

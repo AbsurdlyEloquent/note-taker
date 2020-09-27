@@ -15,7 +15,11 @@ def commands(command):
         'ls': process.list,
         'ls -a': process.list_all
     }
-    return switcher[command]
+    func = switcher[command]
+    if func:
+        return func
+    else:
+        return process.error
 
 # WORKFLOW START
 os.system('clear')
