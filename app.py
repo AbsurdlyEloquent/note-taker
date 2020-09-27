@@ -12,7 +12,8 @@ def commands(command):
         'help': process.list_commands,
         'exit': process.exit,
         'new': process.create_note,
-
+        'ls': process.list,
+        'ls -a': process.list_all
     }
     return switcher[command]
 
