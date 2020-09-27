@@ -1,4 +1,3 @@
-
 # DEPENDECIES
 import os
 import process
@@ -13,7 +12,9 @@ def commands(command):
         'exit': process.exit,
         'new': process.create_note,
         'ls': process.list,
-        'ls -a': process.list_all
+        'ls -a': process.list_all,
+        'update': process.update_note,
+        'get': process.get_one
     }
     if command in switcher:
         return switcher[command]

@@ -33,7 +33,7 @@ def create_note(user):
     with pretty_output(BOLD, FG_GREEN) as out:
         out.write('Success!', ' ')
     print('Here is your new note:')
-    note_printer(**new_note)
+    note_printer(new_note)
 
 def list(user):
     os.system('clear')
@@ -50,13 +50,39 @@ def list_all(user):
     for note in query:
         note_printer(note)
 
+def get_one(user):
+    os.system('clear')
+    query = Notes.get_by_id(input('Enter the ID of the note to get: '))
+    with pretty_output(BOLD, FG_BLUE) as out:
+        out.write('Here is the requested note:')
+    note_printer(query)
+
+def update_note(user):
+    os.system('clear')
+    note_id = input('Enter the ID of the note to update: ')
+    note = Notes.get_by_id(note_id)
+    new_title = input(f'Enter a new title: (to skip press enter)\n{note.title} >> ')
+    if len(new_title) > 0:
+        query = Notes.update(title=new_title).where(Notes.id == note_id)
+        query.execute()
+    new_contents = input('Enter a new note: (to skip press enter)\n>> ')
+    if len(new_contents) > 0:
+        query = Notes.update(contents=new_contents).where(Notes.id == note_id)
+        query.execute()
+    query = Notes.update(timestamp=datetime.now(), username=user).where(Notes.id == note_id)
+    query.execute()
+    updated_note = Notes.get_by_id(note_id)
+    with pretty_output(BOLD, FG_GREEN) as out:
+        out.write('Success!', ' ')
+    print('Here is your updated note:')
+    note_printer(updated_note)
 
 
 def note_printer(note):
     with pretty_output(BOLD, FG_CYAN) as out:
         out.write(note.title, " ")
     with pretty_output(BOLD, FG_MAGENTA) as out:
-        out.write(f'ID: {str(note.id)}')
+        out.write(f'ID: {note.id}')
     with pretty_output(FG_BLUE) as out:
         out.write(f"by {note.username} on {note.timestamp}")
     with pretty_output(BOLD) as out:
