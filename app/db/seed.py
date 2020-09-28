@@ -1,6 +1,7 @@
 import models
 from connection import db
 from datetime import datetime
+from process import note_printer
 
 db.connect()
 db.drop_tables([models.Notes])
@@ -42,3 +43,8 @@ notes = [{
     'timestamp': datetime.now(),
     'username': 'psql'
 }]
+
+for note in notes:
+    new_note = models.Notes(**note)
+    new_note.save()
+    note_printer(new_note)
