@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['app.py'],
+a = Analysis(['app/Note Taker.py'],
              pathex=['/home/absurdlyeloquent/projects/sei/projects/note-taker'],
              binaries=[],
              datas=[],
@@ -23,7 +23,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='app',
+          name='Note Taker',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
