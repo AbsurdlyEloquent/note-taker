@@ -21,10 +21,10 @@ Here's a list of commands:
     rm: Removes a note by its id
            """)
 
-def exit(user):
+def exit(sig, frame=None):
     with pretty_output(BOLD, FG_MAGENTA) as out:
-        out.write('Goodbye!\n')
-    sys.exit()
+        out.write('\nGoodbye!\n')
+    sys.exit(0)
 
 def create_note(user):
     os.system('clear')

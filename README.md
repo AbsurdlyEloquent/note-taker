@@ -32,3 +32,21 @@ To set up a development environment:
 `git clone` this repository, enter `pipenv shell` to enter the **virtual environment**, then `pipenv install` to install all project dependencies.
 
 run `python3 app/db/seed.py` to seed the database and `python3 app/app.py` to start the app.
+
+### Installation
+Installation instructions can be found in the release for each platform:
+[Releases](https://github.com/AbsurdlyEloquent/note-taker/releases)
+
+
+## Usage
+Upon start, you will be asked to enter your name, the you are given the prompt `Note Taker >> `
+
+Here you can use any of the following commands:
+ - `help` - Shows a list of commands
+ - `exit` - Exits the app
+ - `new` - Creates a new note
+ - `get` - Displays one note by its id
+ - `ls` - Lists all the notes you've created
+ - `ls -a` - Lists all the notes ever created
+ - `update` - Updates a note by its id
+ - `rm` - Removes a note by its id
