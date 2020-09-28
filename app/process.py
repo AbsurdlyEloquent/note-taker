@@ -9,12 +9,17 @@ from db.models import Notes
 
 # FUNCTIONS
 def list_commands(user):
-    print("""Here's a list of commands:
-           help: Shows a list of commands (you're here now)
-           exit: Exits the app
-           new: Creates a new note
-           ls: Lists all the notes you've created
-           ls -a: Lists all the notes ever created""")
+    print("""
+Here's a list of commands:
+    help: Shows a list of commands (you're here now)
+    exit: Exits the app
+    new: Creates a new note
+    get: Displays one note by its id
+    ls: Lists all the notes you've created
+    ls -a: Lists all the notes ever created
+    update: Updates a note by its id
+    rm: Removes a note by its id
+           """)
 
 def exit(user):
     with pretty_output(BOLD, FG_MAGENTA) as out:
@@ -77,6 +82,26 @@ def update_note(user):
     print('Here is your updated note:')
     note_printer(updated_note)
 
+def delete_note(user):
+    os.system('clear')
+    note_id = input('Enter the ID of the note to delete: ')
+    note = Notes.get_by_id(note_id)
+    note_printer(note)
+    with pretty_output(BOLD) as out:
+        out.write('Are you sure you want to delete this?', " ")
+    with pretty_output(BOLD, FG_RED) as out:
+        out.write("This action cannot be undone", " ")
+    while True:
+        res = input("(y/n): ")
+        if res == 'y':
+            note.delete_instance()
+            with pretty_output(FG_GREEN) as out:
+                out.write('Successfully removed note...')
+            break
+        elif res == 'n':
+            break
+        else:
+            pass
 
 def note_printer(note):
     with pretty_output(BOLD, FG_CYAN) as out:

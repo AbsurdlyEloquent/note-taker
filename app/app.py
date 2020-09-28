@@ -14,7 +14,8 @@ def commands(command):
         'ls': process.list,
         'ls -a': process.list_all,
         'update': process.update_note,
-        'get': process.get_one
+        'get': process.get_one,
+        'rm': process.delete_note
     }
     if command in switcher:
         return switcher[command]
