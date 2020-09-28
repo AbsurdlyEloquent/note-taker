@@ -43,7 +43,7 @@ def create_note(user):
 def list(user):
     os.system('clear')
     with pretty_output(BOLD) as out:
-        out.write(f'Here are all the notes written by {user}')
+        out.write(f'Here are all the notes written by {user}:')
     for note in Notes.select().where(Notes.username == user):
         note_printer(note)
 
