@@ -1,4 +1,4 @@
 import peewee as p
 
-db = p.PostgresqlDatabase('notes', user='person', password='1234',
+db = p.PostgresqlDatabase('notes', user='psql', password='',
                                     host='localhost', port=5432)
