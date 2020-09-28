@@ -1,6 +1,7 @@
-# DEPENDECIES
+# DEPENDENCIES
 import os
 import process
+from signal import signal, SIGINT
 
 # GLOBAL VARI'S
 user = None
@@ -24,6 +25,8 @@ def commands(command):
 
 # WORKFLOW START
 os.system('clear')
+signal(SIGINT, process.exit)
+
 if not user:
     user = input('Enter your name: ')
     print('Welcome to Note Taker!! :) Enter help for a list of commands')
